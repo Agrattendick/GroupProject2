@@ -1,5 +1,8 @@
+<p align="center">
 # Ben & Jerry's Ice Cream
 ## **It's Delicious!**
+![Ice Cream](/images/Ice_Cream.jpg)
+</p>
 
 We're looking into the popularity of various flavors of Ben & Jerry's ice cream accross the United States0.<br/> 
 
