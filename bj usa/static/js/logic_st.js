@@ -12,27 +12,30 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
   accessToken: API_KEY
 }).addTo(map);
 
-// var link = "http://data.beta.nyc//dataset/0ff93d2d-90ba-457c-9f7e-39e47bf2ac5f/resource/" +
-// "35dd04fb-81b3-479b-a074-a27a37888ce7/download/d085e2f8d0b54d4590b1e7d1f35594c1pediacitiesnycneighborhoods.geojson";
+var link = "\static\\data\\states.json";
 
-var link = "\static\\data\\states.json"
+
+
+
+var Republican = ["Alaska", "Idaho", "Utah", "Arizona", "Montana", "Wyoming", "North Dakota", "South Dakota",
+ "Nebraska", "Kansas", "Oklahoma", "Texas", "Iowa","Missouri", "Arkansas","Louisiana","Wisconsin","Michigan"
+ ,"Indiana","Kentucky","Tennessee","Mississippi", "Alabama", "Ohio","Georgia","Florida","South Carolina","North Dakota",
+ "West Virginia","Pennsylvania"];
 
 
 // Function that will determine the color of a neighborhood based on the borough it belongs to
-function chooseColor(neighborhood) {
-  switch (neighborhood) {
-  case "Benton Park":
-    return "yellow";
+function chooseColor(state) {
+  switch (state) {
+  case Republican[Republican.indexOf(state)]:
+    return "red";
   case "Covenant Blu-Grand Center":
     return "red";
-  case "Botanical Heights":
-    return "orange";
   case "The Ville":
     return "green";
   case "Oarondelet Park":
     return "purple";
   default:
-    return "black";
+    return "blue";
   }
 }
 
