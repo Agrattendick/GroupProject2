@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ben and Jerry's</title>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+
+    <!-- Leaflet JS & CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" 
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" 
+    crossorigin="">
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" 
+    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" 
+    crossorigin=""></script>
+
+    <!-- d3 JavaScript -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/d3Style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 jumbotron text-center">
+          <h1>Is Ben and Jerry's a good or bad influence?</h1>
+          <p>Use the interactive charts below to explore the dataset</p>
+        </div>
+      </div>
+      <div class="row"></div>
+      <div class="col-xs-12 col-md-12">
+        <form action="#" method="post" id="demoForm" class="demoForm">
+            <fieldset>
+                <legend>Choose your x and y</legend>                  
+                <p>
+                    <select id="xChoice" name="xChoice">
+                      <option value="bj_loc">Ben and Jerry's locations</option>
+                      <option value="Ufo_count">Ufo Sightings</option>
+                      <option value="murder_count">Murders</option>
+                      <option value="bj_per_capita">Ben and Jerry per Capita</option>
+                      <option value="ufo_per_capita">Ufo per Capita</option>
+                      <option value="merder_per_capita">Murders per Capita</option>
+                    </select>
+                    <select id="yChoice" name="yChoice">
+                      <option value="bj_loc">Ben and Jerry's locations</option>
+                      <option value="Ufo_count">Ufo Sightings</option>
+                      <option value="murder_count">Murders</option>
+                      <option value="bj_per_capita">Ben and Jerry per Capita</option>
+                      <option value="ufo_per_capita">Ufo per Capita</option>
+                      <option value="merder_per_capita">Murders per Capita</option>
+                  </select>                      
+              </p>          
+              <p>
+                  <input type="button" id="showGraph" value="Run Comparison" />
+              </p>          
+          </fieldset>
+      </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-6  col-md-12">
+        <div id="scatter">
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- API key -->
+    <script type="text/javascript" src="static/js/config.js"></script>
+      <!-- JS  -->
+    <!-- <script type="text/javascript" src="static/js/logic_st.js"></script> -->
+    <!-- <script type="text/javascript" src="static/js/logic2.js"></script> -->
+    <script type="text/javascript" src="static/js/logic3.js"></script>
+    <!-- <script type="text/javascript" src="static/js/logic4.js"></script> -->
+
+  </body>
+</html>
