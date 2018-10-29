@@ -2,6 +2,7 @@ import os
 
 import pandas as pd
 import numpy as np
+import sqlite3
 
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
@@ -33,51 +34,35 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    # getStates("heyhet")
     """Return the homepage."""
     return render_template("index.html")
 
 
 @app.route("/plot")
 def plot():
+    
     return render_template("plot.html")
 
 @app.route("/states")
 def names():
-    """Return a list of sample names."""
 
-    engine = sqlalchemy.create_engine("mysql+pymysql://root:2Banadult@localhost:3306/bj")
 
-    df = pd.read_sql("state_data", engine)
+    # engine = sqlalchemy.create_engine("mysql+pymysql://root:2Banadult@localhost:3306/bj")
 
+    # df = pd.read_sql("state_data", engine)
+    conn = sqlite3.connect("db/benNjerrys.db")
+    df = pd.read_sql("select * from clean_data", conn)
+    df.fillna(0, inplace=True)
     # Use Pandas to perform the sql query
     # stmt = db.session.query(Samples).statement
     # df = pd.read_sql_query(stmt, db.session.bind)
     print(df)
-    #     sel = [
-    #     state.state_name,
-    #     state.murders,
-    #     state.state,
-    #     state.population,
-    #     state.murder_rate,
-    #     state.ufo_sightings,
-    #     state.store_count,
-    #     state.ufo_rate,
-    #     state.store_rate
-    # ]
 
     state = {}
     for result in df:
         print(result)
-        # state['state_name'] = result[1],
-        # state['murders'] = result[2],
-        # state["state"] = result[3],
-        # state['population'] = result[4],
-        # state['murder_rate'] = result[5],
-        # state['ufo_sightings'] = result[6],
-        # state['store_count'] = result[7],
-        # state['ufo_rate'] = result[8],
-        # state['store_rate'] = result[9]
-    # Return a list of the column names (sample names)
+
     print(state)
     return df.to_json(orient="records")
 

@@ -1,5 +1,16 @@
 // Creating map object
 
+// d3.json(`/states`).then(function(data) {
+//     // console.log(data.store_count);
+// }
+// )
+geojson = d3.json(info_link, function(data){
+    // console.log(data);
+    groupStates(data);
+    var state_json = data;
+})
+
+
 var map = L.map("map", {
     center: [40.7, -94.5],
     zoom: 4,
@@ -15,29 +26,34 @@ var map = L.map("map", {
   
   var link = "\static\\data\\states.json";
   
-  
-  
-  
-  var Republican = ["Alaska", "Idaho", "Utah", "Arizona", "Montana", "Wyoming", "North Dakota", "South Dakota",
-   "Nebraska", "Kansas", "Oklahoma", "Texas", "Iowa","Missouri", "Arkansas","Louisiana","Wisconsin","Michigan"
-   ,"Indiana","Kentucky","Tennessee","Mississippi", "Alabama", "Ohio","Georgia","Florida","South Carolina","North Dakota",
-   "West Virginia","Pennsylvania"];
+  var info_link = "/states";
+  var State_murder = {};
+
+
+    
+  var low = ["Utah","Vermont","Nebraska","Minnesota","Rhode Island","Idaho","Maine","North Dakota","New Hampshire"];
+  var med_low = ["Colorado","Montana","New Jersey","Washington","Wisconsin","Iowa", "South Dakota","Connecticut","New York","Hawaii","Wyoming","Massachusetts","Oregon"];
+  var med = ["Arizona","Deleware","Florida","Indiana","Kansas","Kentucky","Michigan","North Carolina","Pennsylvania","Virginia","California","Texas","West Virginia"];
+  var med_high = ["Illinois", "New Mexico","Tennessee","Georgia","Ohio","Oklahoma", "South Carolina"];
+  var high = ["Louisiana", "Nevada","Missouri","Maryland","Alaska","Alabama","Arkansas","Misssisssppi",];
+
   
   
   // Function that will determine the color of a neighborhood based on the borough it belongs to
-  function chooseColor(state) {
-    switch (state) {
-    case Republican[Republican.indexOf(state)]:
-      return "red";
-    default:
-      return "blue";
-    }
-  }
-
-
-
-
-
+  function chooseColor(d) {
+      console.log(d)
+    switch (d){
+     case high[high.indexOf(d)] :
+        return "darkred";
+        case med_high[med_high.indexOf(d)]:
+        return "red";
+        case med[med.indexOf(d)]:
+        return "orange";
+        case med_low[med_low.indexOf(d)]:
+        return "yellow";
+        default:
+        return "green";
+}};
 var info = L.control();
 
 info.onAdd = function (map) {
@@ -46,16 +62,20 @@ info.onAdd = function (map) {
     return this._div;
 };
 
-info.update = function (props) {
-    this._div.innerHTML =  (props ?
-        '<b>' + props.NAME + '</b><br /> Ben & Jerry Count <br> ufo_count <br> Murder_count '
-        : 'Hover over a state');
-};
+// d3.json(`/states`).then(function(data) {
 
+    info.update = function (props) {
+        
+        this._div.innerHTML =  (props ?
+            '<b>' + props.NAME + '</b><br /> Ben & Jerry Count <br> '+  +' <br> Murder_count '
+            : 'Hover over a state');
+    };
+// });
 info.addTo(map);
 
 
 function style(feature) {
+    // console.log(feature);
     return {
         weight: 1,
         opacity: 1,
@@ -114,9 +134,12 @@ function onEachFeature(feature, layer) {
 }
 
 geojson = d3.json(link, function(data) {
+  
     L.geoJson(data, {
     style: style,
     onEachFeature: onEachFeature
 }).addTo(map);
 })
+
+
 // map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
