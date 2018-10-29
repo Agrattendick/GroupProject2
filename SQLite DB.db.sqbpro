@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Prancer/Desktop/GroupProject2/SQLite DB.db" foreign_keys="1"/><window><current_tab id="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1059"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="newUFO"/><default_encoding codec=""/><browsetable_info data="AAAABgAAAAYAdQBmAG8AAAAAAAAAAAAAAAAAAAAAAAAAAAD//////////wAAAAD/////AAAADABuAGUAdwBVAGYAbwAAAAIAAAAAAAAAAAAAAAEAAAACAAAAAAAAAAAA//////////8AAAAA/////wAAAAwAbgBlAHcAVQBGAE8AAAAAAAAAAAAAAAAAAAAAAAAAAAD//////////wAAAAD/////AAAAGABuAGUAdwBMAG8AYwBhAHQAaQBvAG4AcwAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////AAAAAP////8AAAAOAG0AdQByAGQAZQByAHMAAAAAAAAAAAAAAAAAAAAAAAAAAAD//////////wAAAAD/////AAAAEgBsAG8AYwBhAHQAaQBvAG4AcwAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////AAAAAP////8="/></tab_browse><tab_sql><sql name="SQL 1">CREATE TABLE newUFO AS
+SELECT state, COUNT(state) AS ufo_sightings
+FROM ufo
+WHERE datetime &gt; 1977
+GROUP BY state
+ORDER BY state;
+
+CREATE TABLE newLocations AS
+SELECT state, COUNT(name) AS ben_jerry_locations
+FROM locations
+GROUP BY state
+ORDER BY state;
+
+SELECT *
+FROM murders
+LEFT JOIN newUfo ON murders.state=newUfo.state
+LEFT JOIN newLocations ON murders.state=newLocations.state;
+
+
+CREATE TABLE clean_data AS
+SELECT murders.state_name, murders.state, murders.population, murders.murders, murders.murder_rate, newUfo.ufo_sightings, ((newUFO.ufo_sightings/murders.population)*100000) AS ufo_rate, newLocations.ben_jerry_locations, ((newLocations.ben_jerry_locations/murders.population)*100000) AS location_rate
+FROM murders
+LEFT JOIN newUfo ON murders.state=newUfo.state
+LEFT JOIN newLocations ON murders.state=newLocations.state;</sql><current_tab id="0"/></tab_sql></sqlb_project>
