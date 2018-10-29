@@ -11,13 +11,17 @@ d3.json(`/states`).then(function(data) {
 var Xsel = document.getElementById('xChoice');
 var Ysel = document.getElementById('yChoice');
 
+
+
 //click activates.  get new choices, set to selection, clear graph, run magic
 document.getElementById('showGraph').onclick = function () {
     Xsel = document.getElementById('xChoice');
     Ysel = document.getElementById('yChoice');
     document.getElementById('scatter').innerHTML = "";
     console.log( Ysel.value);
-    Magic();
+    d3.json(`/states`).then(function(data) {
+    Magic(data);
+    })
 }
 
 var margin = {
@@ -44,13 +48,16 @@ var svg = d3.select("#scatter")
     var yValues = [];
     var xValues =[];
 
-    var i;
-    for (i = 0; i < 51; i++) { 
-        yValues.push(data[Ysel.value][i]);
-        xValues.push(data[Xsel.value][i])
-    }    
-    console.log(yValues);
-        // xValues.push(+d[Xsel.value]);
+    // var i;
+    // for (i = 0; i < 51; i++) { 
+    //     yValues.push(data[Ysel.value]);
+    //     xValues.push(data[Xsel.value][i])
+    // }    
+    data.map(d =>{
+
+        yValues.push(+d[Ysel.value]);
+        xValues.push(+d[Xsel.value]);
+    }); 
 
 
 //define x and y scaling based off x and y values and viewbox range
@@ -92,49 +99,50 @@ var svg = d3.select("#scatter")
         .attr("class", "tooltip")				
         .style("opacity", .5);
 
+    // console.log(yValues);
 //draw circles with x/y values and create mouse events for each
     svg.selectAll("circle")
         .data(data)
         .enter()
         .append("circle")
-        .attr("cx", )
-        .attr("cy", j => yScale(yValues[j]))
+        .attr("cx", i=> xScale(i[`${Xsel.value}`]))
+        .attr("cy", j => yScale(j[`${Ysel.value}`]))
         .attr("r", 15)
-        .style("opacity", .25);
-        // .on("mouseover", function(d) {		
-        //     div.transition()		
-        //        .duration(200)		
-        //        .style("opacity", .9);		
-        //     div.html(d.state + "<br>" + `${Xsel.value}: ` + d[`${Xsel.value}`] + "<br>" + `${Ysel.value}: ` + d[`${Ysel.value}`])	
-        //        .style("left", (d3.event.pageX) + "px")		
-        //        .style("top", (d3.event.pageY - 28) + "px");	
-        //     })					
-        // .on("mouseout", function(d) {		
-        //     div.transition()		
-        //         .duration(500)		
-        //         .style("opacity", 0);	
-        // });
+        .style("opacity", .25)
+        .on("mouseover", function(d) {		
+            div.transition()		
+               .duration(200)		
+               .style("opacity", .9);		
+            div.html(d.state + "<br>" + `${Xsel.value}: ` + d[`${Xsel.value}`] + "<br>" + `${Ysel.value}: ` + d[`${Ysel.value}`])	
+               .style("left", (d3.event.pageX) + "px")		
+               .style("top", (d3.event.pageY - 28) + "px");	
+            })					
+        .on("mouseout", function(d) {		
+            div.transition()		
+                .duration(500)		
+                .style("opacity", 0);	
+        });
 
 //text treated separately.  need extra a=>a in data() to ensure all data used
 //creates new index, otherwise first 24(?) don't get added-already has those index
 //numbers in use
-    // svg.selectAll("text")
-    //     .data(data, a=>a)
-    //     .enter()
-    //     .append("text")
-    //     .attr("x", a=> xScale(a[`${Xsel.value}`]))
-    //     .attr("y", b=> yScale(b[`${Ysel.value}`])+7)
-    //     .text(c => `${c.abbr}`)
-    //     .attr("class", "stateText")
-    //     .attr("font-size", "15px")
-    //     .attr("fill", "red")
-    //     .style("opacity", .75)
+    svg.selectAll("text")
+        .data(data, a=>a)
+        .enter()
+        .append("text")
+        .attr("x", a=> xScale(a[`${Xsel.value}`]))
+        .attr("y", b=> yScale(b[`${Ysel.value}`])+7)
+        .text(c => `${c.state}`)
+        .attr("class", "stateText")
+        .attr("font-size", "15px")
+        .attr("fill", "red")
+        .style("opacity", .75)
 
     };
 
     d3.json(`/states`).then(function(data) {
         console.log(Ysel.value)
-        console.log(data[Ysel.value]);
+        console.log(data);
         Magic(data);
     });
 

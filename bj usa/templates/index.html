@@ -16,6 +16,10 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <!-- Leaflet-Choropleth JavaScript -->
+    <script type="text/javascript" src="static/js/choropleth.js"></script>
+
+
     <!-- Our CSS -->
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/d3Style.css">
@@ -31,48 +35,7 @@
       </div>
     <!-- map div -->
     <div id="map"></div>
-    <div class="container-fluid">
-      <h1>hey there</h1>
-      <div class="row">
-          <div class="col-xs-12 col-md-12">
-              <form action="#" method="post" id="demoForm" class="demoForm">
-                  <fieldset>
-                      <legend>Choose your x and y</legend>                  
-                      <p>
-                          <select id="xChoice" name="xChoice">
-                            <!-- values = columnn names -->
-                              <option value="store_count">Number of Ben and Jerry's</option>
-                              <option value="ufo_sightings">Number of Ufo Sightings</option>
-                              <option value="Murders">Number of Murders</option>
-                              <option value="store_rate">Ben and Jerry's per Capita</option>
-                              <option value="ufo_rate">Ufo Sightings per Capita</option>
-                              <option value="murder_rate">Murders per Capita</option>
-                          </select>
-                          <select id="yChoice" name="yChoice">
-                              <option value="ufo_sightings">Number of Ufo Sightings</option>
-                              <option value="store_count">Number of Ben and Jerry's</option>
-                              <option value="Murders">Number of Murders</option>
-                              <option value="store_rate">Ben and Jerry's per Capita</option>
-                              <option value="ufo_rate">Ufo Sightings per Capita</option>
-                              <option value="murder_rate">Murders per Capita</option>
-                          </select>                      
-                      </p>          
-                      <p>
-                          <input type="button" id="showGraph" value="Run Comparison" />
-                      </p>          
-                  </fieldset>
-              </form>
-          </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6  col-md-12">
-              <div id="scatter">
-                <!-- We append our chart here. -->
-              </div>
-            </div>
-        </div>
 
-    </div>
     <!-- API key -->
     <script type="text/javascript" src="static/js/config.js"></script>
       <!-- JS  -->
@@ -83,16 +46,10 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script> -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script> 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="static/js/logic4.js"></script>
+    <!-- <script type="text/javascript" src="static/js/logic4.js"></script> -->
 
   </body>
 </html>
