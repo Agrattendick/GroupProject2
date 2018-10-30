@@ -4,11 +4,36 @@
 //     // console.log(data.store_count);
 // }
 // )
+var geojson;
+var info_link = "/states";
+var State_murder = {};
 geojson = d3.json(info_link, function(data){
     // console.log(data);
-    groupStates(data);
-    var state_json = data;
-})
+    data.map(d=>{
+        
+        State_murder[d["state_name"]]= d["murders"];
+     })
+    });
+console.log(State_murder);
+var State_store = {};
+geojson = d3.json(info_link, function(data){
+    // console.log(data);
+    data.map(d=>{
+        
+        State_store[d["state_name"]]= d["ben_jerry_locations"];
+     })
+    });
+
+var State_ufo = {};
+geojson = d3.json(info_link, function(data){
+    // console.log(data);
+    data.map(d=>{
+        
+        State_ufo[d["state_name"]]= d["ufo_sightings"];
+        })
+    });
+
+
 
 
 var map = L.map("map", {
@@ -26,8 +51,8 @@ var map = L.map("map", {
   
   var link = "\static\\data\\states.json";
   
-  var info_link = "/states";
-  var State_murder = {};
+  
+ 
 
 
     
@@ -41,7 +66,7 @@ var map = L.map("map", {
   
   // Function that will determine the color of a neighborhood based on the borough it belongs to
   function chooseColor(d) {
-      console.log(d)
+      
     switch (d){
      case high[high.indexOf(d)] :
         return "darkred";
@@ -67,7 +92,7 @@ info.onAdd = function (map) {
     info.update = function (props) {
         
         this._div.innerHTML =  (props ?
-            '<b>' + props.NAME + '</b><br /> Ben & Jerry Count <br> '+  +' <br> Murder_count '
+            '<b>' + props.NAME + '</b><br /> '+ State_murder[props.NAME] +' Murder_count <br> ' + State_store[props.NAME] + ' Store Count <br>' + State_ufo[props.NAME] + ' Ufo Sightings'
             : 'Hover over a state');
     };
 // });
