@@ -1,6 +1,6 @@
 var myMap = L.map("map", {
   center: [37.7749, -122.4194],
-  zoom: 13
+  zoom: 5
 });
 
 // Adding tile layer
@@ -10,24 +10,24 @@ L.tileLayer("https://api.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?acce
   id: "mapbox.streets",
   accessToken: API_KEY
 }).addTo(myMap);
+ 
+d3.json("ufomap2.geojson", function(data) {
+  function plotData(data){
 
-var geojsonLayer = new L.GeoJSON.AJAX("ufomap.geojson");       
-geojsonLayer.addTo(map);
+    L.geoJson(data, {
+      pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, geojsonMarkerOptions);
 
+      },
+      coords = [], //define an array to store coordinates
+      onEachFeature: function (feature, layer) {
+                popupOptions = {maxWidth: 200};
+               layer.bindPopup(feature.properties.datetime);
+               coords.push(feature.geometry.coordinates);
+      },
+      coordsToLatLng: function (coords) {
+      return new L.heatLayer(coords);
+      }
 
-
-//var newtry = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=Ben%20and%20Jerry%27s+in+AL&key=AIzaSyAav9-7IXlau7ObnUrVHerk39REwQzNvHI";
-
-d3.json(geojsonLayer, function(response) {
-
-  console.log(response);
-
-  for (var i = 0; i < response.length; i++) {
-    var geometry = response[i].geometry;
-
-    if (geometry) {
-      L.marker([geometry.coordinates[1], geometry.coordinates[0]]).addTo(myMap);
-    }
-  }
-
-});
+    }).addTo(map);
+  }});
