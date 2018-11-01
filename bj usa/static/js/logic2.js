@@ -96,7 +96,7 @@ info.onAdd = function (map) {
             : 'Hover over a state');
     };
 // });
-info.addTo(map);
+// info.addTo(map);
 
 
 function style(feature) {
@@ -166,5 +166,33 @@ geojson = d3.json(link, function(data) {
 }).addTo(map);
 })
 
+var info2 = L.control({
+    position: "bottomright"
+   });
+  
+
+info2.onAdd = function(map){
+    var div = L.DomUtil.create("div", "info legend"),
+    grades = [0, 1, 2, 3, 4],
+    labels = [];
+    div.innerHTML = '<h5>Murders per</h5><h6>100,000 residents</h6>'
+    var color = ["green", "yellow", "orange", "red", "darkred"];
+    // var muder_per = [" < 2.5"," 2.5-4", " 4-6  ", " 6-8  ", " 8+  "]
+    var muder_per = ["0-2.5","2.5-4","4-6","6-8","8+"];
+    //create <i style ="background: colorchoice"> with text of current grade[]
+    // then in there is another grade to follow (grade[i+1] is true) add dash and grade[i+1] and break
+    //otherwise add +
+    for (var i =0; i < grades.length; i++) {
+      div.innerHTML +=
+        '<i style="background: ' + color[i] + '"></i> ' +
+        muder_per[i] + '<br>';
+    }
+  
+    return div;
+  };
+
+
+info.addTo(map);
+info2.addTo(map);
 
 // map.attributionControl.addAttribution('Population data &copy; <a href="http://census.gov/">US Census Bureau</a>');
